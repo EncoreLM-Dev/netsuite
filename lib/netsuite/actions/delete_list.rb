@@ -17,9 +17,10 @@ module NetSuite
       #   </platformMsgs:deleteList>
       # </soap:Body>
       def request_body
-        list = @options.is_a?(Hash) ? @options[:list] : @options
+        options_is_hash = @options.is_a?(Hash)
+        list = options_is_hash ? @options[:list] : @options
 
-        formatted_list = if @options[:type_id]
+        formatted_list = if options_is_hash && @options[:type_id]
           type_id = @options[:type_id]
           record_type = 'platformCore:CustomRecordRef'
 
